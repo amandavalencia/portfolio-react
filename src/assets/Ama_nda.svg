@@ -1,0 +1,42 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="text-cutout">
+      <rect width="1200" height="900" fill="white"/>
+      <text
+        x="90"
+        y="360"
+        font-family="Anton, Arial Black, sans-serif"
+        font-size="300"
+        font-weight="900"
+        letter-spacing="-10"
+        fill="black"
+      >
+        AMA
+      </text>
+      <text
+        x="90"
+        y="670"
+        font-family="Anton, Arial Black, sans-serif"
+        font-size="300"
+        font-weight="900"
+        letter-spacing="-10"
+        fill="black"
+      >
+        NDA
+      </text>
+    </mask>
+  </defs>
+
+  <!-- bild bakom -->
+  <image
+    href="plants.jpg"
+    x="0"
+    y="0"
+    width="1200"
+    height="900"
+    preserveAspectRatio="xMidYMid slice"
+  />
+
+  <!-- beige lager med utskuren text -->
+  <rect width="1200" height="900" fill="#DAC9C0" mask="url(#text-cutout)"/>
+</svg>

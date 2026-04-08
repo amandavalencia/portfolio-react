@@ -1,0 +1,96 @@
+.navbar {
+  position: fixed;
+  top: 5px;
+  padding: 0 2rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: var(--green-soft);
+}
+
+.navbar-scrolled {
+  width: fit-content;
+  height: 44px;
+  padding: 0 1.5rem;
+  border-radius: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.9;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--text-hover);
+}
+
+.navLink.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+/* ── Hamburger (mobile) ───────────────────── */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--green-deep);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.hamburger-btn:focus {
+  outline: none;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 640px) {
+  .navbar {
+    justify-content: end;
+    background-color: transparent;
+    padding: 0px;
+  }
+
+  .hamburger-btn {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: absolute;
+    top: 49px;
+    left: 0;
+    right: 0;
+    background-color: var(--green-soft);
+    padding: 2rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+  }
+}

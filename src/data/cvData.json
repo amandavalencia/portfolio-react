@@ -1,0 +1,48 @@
+{
+  "education": [
+    {
+      "school": "Chas Academy",
+      "meta": "2025 – Pågående | Fullstack-utvecklare .NET"
+    },
+    {
+      "school": "Medieinstitutet",
+      "meta": "2023 – 2025 | Frontend-utvecklare",
+      "description": "Under min utbildning på Medieinstitutet har jag utvecklat färdigheter inom frontend-utveckling, inklusive HTML5, CSS3, JavaScript och React.js. Jag har arbetat med responsiv design, UX/UI och använt Git för versionskontroll."
+    },
+    {
+      "school": "Kunskapsgymnasiet Globen",
+      "meta": "2014 – 2017 | Ekonomi/juridik"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Leonh, Stockholm",
+      "role": "Frontend-Utvecklare",
+      "meta": "Januari 2026 – nuvarande • Timanställd Frontend",
+      "description": "Jag arbetar som timanställd frontendutvecklare på Leonh AB där jag bidrar till utvecklingen av företagets webb och digitala material. Arbetet har bland annat inneburit att hjälpa till att bygga deras nya hemsida samt förbättra och strukturera frontend-komponenter.",
+      "listIntro": "Några av de saker jag har arbetat med:",
+      "tasks": [
+        "Bidragit till utvecklingen av företagets nya hemsida i Framer (leonh.se)",
+        "Justering och förbättring av frontend-komponenter och styling",
+        "Digitalisering av marknadsrapporter till webbaserade vyer",
+        "Anpassning av gränssnitt utifrån designskisser i Figma"
+      ],
+      "summary": "Arbetet har gett mig erfarenhet av att arbeta i ett riktigt utvecklingsprojekt där design, frontend och innehåll behöver samspela för att skapa tydliga och användbara lösningar."
+    },
+    {
+      "company": "Neovici, Stockholm",
+      "role": "Frontend-Utvecklare",
+      "meta": "September–December 2024, Januari–April 2025",
+      "description": "Jag gjorde båda mina praktikperioder på Neovici, där jag arbetade med både förvaltningsprojekt och nyutveckling. Arbetade med att utveckla användarsgränssnitt i JavaScript och TypeScript med hjälp av lit-html och React Hooks.",
+      "listIntro": "Några av de saker jag har gjort:",
+      "tasks": [
+        "Startat och drivit ett projekt från idé till MVP, inklusive implementation av större komponenter.",
+        "Buggfixar och kodmigrering (JavaScript/TypeScript, Polymer/TypeScript).",
+        "Anpassning av gränssniit utifrån Figma.",
+        "Arbetat i krossfunktionellt team enligt agila metoder.",
+        "Effektivt samarbete och kommunikation via Slack."
+      ],
+      "summary": "Praktiken har gett mig en bra inblick i hur ett utvecklingsteam jobbar och lärdomar som gjort att jag känner mig trygg inför nästa steg!"
+    }
+  ]
+}
