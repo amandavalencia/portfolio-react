@@ -1,247 +1,69 @@
-/* ── CV page styles ───────────────────────────────── */
-.info-container h3,
-.info-container h4,
-.info-container p,
-.info-container ul {
-  margin: 0;
-}
-.content-wrapper {
-  max-width: 800px;
-}
-
-.header-container {
-  margin: 30px 0;
-  display: flex;
+﻿.cv-page {
   width: 100%;
-  flex-direction: column;
-  align-items: center;
+  max-width: 940px;
+  padding: 30px 20px 48px;
+  color: var(--text-primary);
 }
 
-.two-containers-wrapper {
+.cv-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cv-header h1 {
+  margin: 0 0 20px;
+}
+
+.cv-actions {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-
-.right-container {
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  gap: 32px;
-}
-
-.left-container {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  background-color: var(--bg-card);
-  align-items: center;
-  padding: 20px;
-  color: var(--text-main);
-  border-radius: 20px;
-  padding-bottom: 100px;
-}
-
-.left-container-text {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 0 50px 0;
-}
-
-.left-container-text li {
-  list-style: none;
-}
-
-/* ── Contact icon list ────────────────────────────── */
-.contact-list {
-  display: flex;
-  flex-direction: row;
-  gap: 14px;
-}
-
-.contact-list a {
-  display: flex;
-  color: var(--text-main);
-  transition:
-    color 0.2s,
-    transform 0.2s;
-}
-
-.contact-list a:hover {
-  color: var(--brown-primary);
-  transform: scale(1.15);
-}
-
-.contact-list svg {
-  width: 24px;
-  height: 24px;
-}
-
-.contact-label {
-  display: none;
-}
-
-/* ── img section ─────────────────────────── */
-.profile-img {
-  width: 200px;
-}
-
-.profile-img-wrapper {
-  overflow: hidden;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-
-/* ── Education ─────────────────────────── */
-.info-container {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.info-container h3 {
-  margin: 0;
-}
-
-/* each education/job post */
-.info-container article {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* optional separation between posts */
-.info-container article:not(:last-child) {
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* heading for each school/job */
-.info-container h4 {
-  line-height: 1.3;
-}
-
-/* meta text */
-.meta {
-  font-size: 0.9rem;
-  opacity: 0.75;
-  line-height: 1.5;
-}
-
-/* ── Job  ─────────────────────────── */
-.job-entry {
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
-.job-header {
-  background-color: var(--bg-card);
-  padding: 10px 14px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
+.cv-actions a {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid var(--green-deep);
+  border-radius: 8px;
+  color: var(--text-primary);
 }
 
-.job-header h4 {
-  margin: 0;
+.cv-actions a:last-child {
+  background: var(--green-deep);
+  color: white;
 }
 
-.job-card {
-  padding: 0 4px;
-  line-height: 1.6;
-  color: var(--text-main);
+.cv-actions a:hover {
+  background: var(--bg-soft);
+  color: var(--text-primary);
+}
+
+.cv-actions a:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+.cv-document {
+  width: 100%;
+}
+
+.cv-document .react-pdf__Document {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
 }
 
-.job-card ul {
-  padding-left: 1.2rem;
+.cv-document .react-pdf__Page {
+  box-shadow: var(--shadow-soft);
 }
 
-.job-card li + li {
-  margin-top: 0.35rem;
+.cv-document .react-pdf__Page__canvas {
+  display: block;
 }
 
-.job-card .meta {
-  font-size: 0.85rem;
-  opacity: 0.75;
-}
-
-
-/* ── Print styles ─────────────────────────────────── */
-@media print {
-  .navbar,
-  .print-btn {
-    display: none;
-  }
-
-  body {
-    background: white;
-    color: black;
-  }
-
-  .left-container {
-    background-color: #f0ede8;
-    width: 40%;
-  }
-
-  .right-container {
-    width: 60%;
-  }
-
-  .two-containers-wrapper {
-    flex-direction: row;
-  }
-
-  .mainContainer {
-    padding: 0;
-  }
-
-  .contact-list {
-    flex-direction: column;
-  }
-
-  .contact-list a {
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .contact-label {
-    display: inline;
-    font-size: 0.85rem;
-  }
-
-  .header-container {
-    margin: 10px 0;
-  }
-
-  .header-container h1 {
-    font-size: 1.6rem;
-    margin: 0;
-  }
-
-  .header-container p {
-    font-size: 0.85rem;
-    margin: 4px 0 0 0;
-  }
-}
-
-/* ── Responsive ───────────────────────────────────── */
-@media screen and (max-width: 768px) {
-  .two-containers-wrapper {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .left-container,
-  .right-container {
-    width: 100%;
+@media (max-width: 600px) {
+  .cv-page {
+    padding: 24px 12px;
   }
 }
