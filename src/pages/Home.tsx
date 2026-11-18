@@ -2,6 +2,7 @@ import "./Home.css";
 import amaNda from "../assets/Ama_nda.svg";
 import bgImage from "../assets/bg-img.jpg";
 import { About } from "../components/About";
+import { PolaroidCollage } from "../components/PolaroidCollage";
 
 export const Home = () => {
   return (
@@ -17,6 +18,7 @@ export const Home = () => {
         </div>
       </section>
       <About></About>
+      <PolaroidCollage />
     </div>
   );
 };
