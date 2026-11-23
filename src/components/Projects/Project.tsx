@@ -13,6 +13,17 @@ type Repo = {
   topics?: string[];
 };
 
+// Keep displayed descriptions in Swedish instead of using GitHub's original text.
+const projectDescriptions: Record<string, string> = {
+  LIA4U:
+    "Ett skolprojekt som hjälper studenter att söka efter yrken och hitta företag inför sin LIA (lärande i arbete).",
+  "PT-Karlsson":
+    "En webbplats för en personlig tränare inom kampsport som erbjuder träningsprogram på nätet, med fokus på enkel innehållshantering och en smidig användarupplevelse.",
+};
+
+const getProjectDescription = (name: string) =>
+  projectDescriptions[name] ?? "En svensk projektbeskrivning kommer snart.";
+
 export const Project = () => {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +39,7 @@ export const Project = () => {
         );
 
         if (!res.ok) {
-          throw new Error("Kunde inte hämta repositories");
+          throw new Error("Kunde inte hämta projekten.");
         }
 
         const data: Repo[] = await res.json();
@@ -62,7 +73,7 @@ export const Project = () => {
             <article key={repo.id} className="project-card">
               <div className="project-card-body">
                 <h3>{repo.name}</h3>
-                <p>{repo.description ?? "Ingen beskrivning än."}</p>
+                <p>{getProjectDescription(repo.name)}</p>
 
                 {repo.topics && repo.topics.length > 0 && (
                   <div className="project-tags">
@@ -100,7 +111,7 @@ export const Project = () => {
               &times;
             </button>
             <h2>{repo.name}</h2>
-            <p>{repo.description ?? "Ingen beskrivning än."}</p>
+            <p>{getProjectDescription(repo.name)}</p>
 
             {repo.topics && repo.topics.length > 0 && (
               <div className="project-tags">

@@ -24,7 +24,8 @@ export const Nav = () => {
       <button
         className="hamburger-btn"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Toggle menu"
+        aria-label={isMenuOpen ? "Stäng menyn" : "Öppna menyn"}
+        aria-expanded={isMenuOpen}
       >
         &#9776;
       </button>
