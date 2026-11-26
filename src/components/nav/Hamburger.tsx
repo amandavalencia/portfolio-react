@@ -16,7 +16,8 @@ export const Hamburger = () => {
       <button
         onClick={toggleMenu}
         className="hamburger-btn"
-        aria-label="Toggle menu"
+        aria-label={isMenuOpen ? "Stäng menyn" : "Öppna menyn"}
+        aria-expanded={isMenuOpen}
       >
         &#9776;
       </button>
