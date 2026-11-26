@@ -1,141 +1,99 @@
-import { useEffect, useState } from "react";
 import "./Project.css";
-import { OutlineButton } from "../buttons/OutlineButton";
-import { Loader } from "../Loader/Loader";
+import { projects, type ProjectItem, type ProjectStatus } from "./projects";
 
-type Repo = {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string | null;
-  homepage: string | null;
-  stargazers_count: number;
-  topics?: string[];
+const statusLabel: Record<ProjectStatus, string> = {
+  klar: "Klar",
+  pågående: "Pågående",
+  "kommer-snart": "Kommer snart",
 };
 
-// Keep displayed descriptions in Swedish instead of using GitHub's original text.
-const projectDescriptions: Record<string, string> = {
-  LIA4U:
-    "Ett skolprojekt som hjälper studenter att söka efter yrken och hitta företag inför sin LIA (lärande i arbete).",
-  "PT-Karlsson":
-    "En webbplats för en personlig tränare inom kampsport som erbjuder träningsprogram på nätet, med fokus på enkel innehållshantering och en smidig användarupplevelse.",
-};
+const ProjectImage = ({ project }: { project: ProjectItem }) => (
+  <div className="project-media">
+    {project.image ? (
+      <img src={project.image} alt={`Skärmdump av ${project.title}`} loading="lazy" />
+    ) : (
+      <div className="project-media-fallback" aria-hidden="true">
+        <span>
+          {project.status === "kommer-snart" ? "Kommer snart" : project.title}
+        </span>
+      </div>
+    )}
+  </div>
+);
 
-const getProjectDescription = (name: string) =>
-  projectDescriptions[name] ?? "En svensk projektbeskrivning kommer snart.";
-
-export const Project = () => {
-  const [repos, setRepos] = useState<Repo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [openModal, setOpenModal] = useState<number | null>(null);
-  console.log("repos", repos);
-
-  useEffect(() => {
-    async function fetchRepos() {
-      try {
-        const res = await fetch(
-          "https://api.github.com/users/amandavalencia/repos",
-        );
-
-        if (!res.ok) {
-          throw new Error("Kunde inte hämta projekten.");
-        }
-
-        const data: Repo[] = await res.json();
-
-        const filtered = data
-          .filter((repo) => !repo.name.includes("test") && repo.homepage)
-          .sort((a, b) => b.stargazers_count - a.stargazers_count);
-
-        setRepos(filtered);
-      } catch {
-        setError("Något gick fel när projekten hämtades.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchRepos();
-  }, []);
-
-  if (loading) return <Loader />;
-  if (error) return <p>{error}</p>;
+const ProjectCard = ({ project }: { project: ProjectItem }) => {
+  const comingSoon = project.status === "kommer-snart";
+  const classes = [
+    "project-card",
+    project.featured ? "featured" : "",
+    comingSoon ? "coming-soon" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <>
-      <section className="projects-section">
-        <h1>Mina projekt</h1>
-        <p className="section-sub">Ett urval av saker jag har byggt.</p>
+    <article className={classes}>
+      <ProjectImage project={project} />
 
-        <div className="projects-grid">
-          {repos.map((repo) => (
-            <article key={repo.id} className="project-card">
-              <div className="project-card-body">
-                <h3>{repo.name}</h3>
-                <p>{getProjectDescription(repo.name)}</p>
+      <div className="project-card-body">
+        <div className="project-meta">
+          {project.featured && <span className="badge badge-accent">Utvalt</span>}
+          {project.status === "pågående" && (
+            <span className="badge">{statusLabel[project.status]}</span>
+          )}
+          {project.context && <span className="badge">{project.context}</span>}
+        </div>
 
-                {repo.topics && repo.topics.length > 0 && (
-                  <div className="project-tags">
-                    {repo.topics.map((topic) => (
-                      <span key={topic} className="tag">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                )}
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
 
-                <OutlineButton onClick={() => setOpenModal(repo.id)}>
-                  Läs mer
-                </OutlineButton>
-              </div>
-            </article>
+        {project.tech.length > 0 && (
+          <ul className="project-tags" aria-label="Teknik">
+            {project.tech.map((t) => (
+              <li key={t} className="tag">
+                {t}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {project.links.length > 0 && (
+          <div className="project-links">
+            {project.links.map((link) => (
+              <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                {link.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+};
+
+export const Project = () => {
+  const featured = projects.filter((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
+
+  return (
+    <section className="projects-section">
+      <h1>Mina projekt</h1>
+      <p className="section-sub">Ett urval av saker jag har byggt.</p>
+
+      {featured.length > 0 && (
+        <div className="projects-featured">
+          {featured.map((p) => (
+            <ProjectCard key={p.id} project={p} />
           ))}
         </div>
-      </section>
+      )}
 
-      {repos.map((repo) => (
-        <div
-          key={repo.id}
-          className={`modal-overlay ${openModal === repo.id ? "open" : ""}`}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setOpenModal(null);
-          }}
-        >
-          <div className="modal-card">
-            <button
-              className="modal-close"
-              aria-label="Stäng"
-              onClick={() => setOpenModal(null)}
-            >
-              &times;
-            </button>
-            <h2>{repo.name}</h2>
-            <p>{getProjectDescription(repo.name)}</p>
-
-            {repo.topics && repo.topics.length > 0 && (
-              <div className="project-tags">
-                {repo.topics.map((topic) => (
-                  <span key={topic} className="tag">
-                    {topic}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="modal-links">
-              <a href={repo.html_url} target="_blank" rel="noreferrer">
-                GitHub
-              </a>
-              {repo.homepage && (
-                <a href={repo.homepage} target="_blank" rel="noreferrer">
-                  Hemsida
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
-    </>
+      <div className="projects-grid">
+        {rest.map((p) => (
+          <ProjectCard key={p.id} project={p} />
+        ))}
+      </div>
+    </section>
   );
 };
