@@ -8,6 +8,12 @@
 }
 
 /* ── Home hero layout ─────────────────────────────── */
+@media (min-width: 1024px) {
+  #about {
+    min-height: 90vh;
+  }
+}
+
 .home-hero {
   max-width: 900px;
   width: 100%;
